@@ -13,15 +13,22 @@ public class GitHubControllerTests {
 
     @Test
     public void testGetRepositories_HappyPath() {
+        // Given
+        String username = "octocat";
+        // When
         RestAssured.given()
-                .when().get("/github/octocat/repos")
+                .when()
+                .get("/github/" + username + "/repos")
                 .then()
+                // Then
                 .statusCode(200)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body("$.size()", greaterThan(0))
                 .body("[0].name", not(emptyOrNullString()))
-                .body("[0].ownerLogin", equalTo("octocat"))
-                .body("[0].branches", not(empty()));
+                .body("[0].ownerLogin", equalTo(username))
+                .body("[0].branches.size()", greaterThan(0))
+                .body("[0].branches[0].name", not(emptyOrNullString()))
+                .body("[0].branches[0].lastCommitSha", matchesPattern("^[a-f0-9]{40}$"));
     }
 
 }
