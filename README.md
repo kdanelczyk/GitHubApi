@@ -65,38 +65,10 @@ The application will be available at `http://localhost:8080`.
   - `username` (required): The GitHub username of the user whose repositories you want to retrieve.
 
 - **Response**: 
-  - Returns a list of repositories (excluding forks) with their branch names and last commit SHAs.
+  - Returns a list of repositories (excluding forks) with their branch names and last commit SHAs:
+    
+![z](https://github.com/user-attachments/assets/084fd8a6-8528-4fef-8266-59700e561b42)
 
-  Example:
-
-  ```json
-  [
-    {
-      "repository_name": "repo-name-1",
-      "owner_login": "owner-name",
-      "branches": [
-        {
-          "branch_name": "main",
-          "last_commit_sha": "abc1234def5678"
-        },
-        {
-          "branch_name": "dev",
-          "last_commit_sha": "def9876ghij432"
-        }
-      ]
-    },
-    {
-      "repository_name": "repo-name-2",
-      "owner_login": "owner-name",
-      "branches": [
-        {
-          "branch_name": "main",
-          "last_commit_sha": "hijk987lmn2345"
-        }
-      ]
-    }
-  ]
-  ```
 
 #### Error Response for Non-Existent GitHub User
 
@@ -104,13 +76,9 @@ The application will be available at `http://localhost:8080`.
 
 - **Response**:
   - If the user does not exist, a `404` error is returned with the following structure:
+  
+![a](https://github.com/user-attachments/assets/6891244a-2652-412d-9ce5-cdf49d6d8653)
 
-  ```json
-  {
-    "status": 404,
-    "message": "User not found"
-  }
-  ```
 
 ## Testing
 
@@ -119,14 +87,6 @@ The application will be available at `http://localhost:8080`.
 The project includes an integration test that verifies the happy path scenario—when a valid GitHub username is provided. The test ensures the correct response format, including repository details and branch information.
 
 To run the tests:
-
-```bash
-./gradlew test
-```
-
-### Error Handling Test
-
-The service also includes a test to check the error handling when an invalid GitHub username is requested.
 
 ```bash
 ./gradlew test
